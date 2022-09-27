@@ -10,11 +10,18 @@ import express from 'express'
 import api from './api'
 import constants from '@common/constants/constants'
 
+import sequelizeInstance from '@infrastructure/sequelize/connection'
+import sequelizeLoader from '@infrastructure/sequelize/orm/orm'
+
 export const app = express()
 
 setupApp(app)
 setupGlobalMiddleware(app)
 setupRoutes(app, api())
+
+sequelizeLoader(sequelizeInstance, false)
+  .then(_ => console.log('connection database success'))
+  .catch(err => console.log('connection database failed: ', err))
 
 app.listen(constants.SERVER_PORT, () => {
   console.log(`server is running on port: ${constants.SERVER_PORT}`)
