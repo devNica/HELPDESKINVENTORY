@@ -2,41 +2,41 @@ import { DataTypes, Model, Optional } from 'sequelize'
 import sequelizeInstance from '../connection'
 
 export interface UserAccountEntity {
-  id: number
+  id: string
   email: string
   password: string
   fullname: string
   phoneNumber: string
   resetPassword: boolean
-  expiresIn: string
+  expiresIn: number
   isRoot: boolean
   isActive: boolean
-  createdAt: string
-  updatedAt: string
+  createdAt: number
+  updatedAt: number
 }
 
 export interface UserAccountAttrInput extends Optional<UserAccountEntity, 'id' | 'isActive' | 'resetPassword' | 'expiresIn' | 'updatedAt'> {}
+export interface UserAccountAttrOutput extends Required<UserAccountEntity> {}
 
 export default class UserAccountModel extends Model<UserAccountEntity, UserAccountAttrInput> implements UserAccountEntity {
-  public id!: number
+  public id!: string
   public email!: string
   public password!: string
   public fullname!: string
   public phoneNumber!: string
   public resetPassword!: boolean
-  public expiresIn!: string
+  public expiresIn!: number
   public isRoot!: boolean
   public isActive!: boolean
-  public createdAt!: string
-  public updatedAt!: string
+  public createdAt!: number
+  public updatedAt!: number
 }
 
 UserAccountModel.init({
   id: {
-    type: DataTypes.BIGINT,
+    type: DataTypes.UUID,
     primaryKey: true,
-    autoIncrement: true,
-    unique: true
+    defaultValue: DataTypes.UUIDV4
   },
   email: {
     type: DataTypes.STRING(100),
@@ -59,7 +59,7 @@ UserAccountModel.init({
     allowNull: false
   },
   expiresIn: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   isRoot: {
@@ -71,15 +71,15 @@ UserAccountModel.init({
     defaultValue: true
   },
   createdAt: {
-    type: DataTypes.DATE,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   updatedAt: {
-    type: DataTypes.DATE,
+    type: DataTypes.INTEGER,
     allowNull: true
   }
 }, {
   sequelize: sequelizeInstance,
-  modelName: 'user',
+  modelName: 'user_account',
   underscored: true
 })

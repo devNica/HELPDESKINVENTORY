@@ -1,5 +1,5 @@
 import { Dialect } from 'sequelize'
-import constants from '../shared/constants'
+import constants from '@common/constants/constants'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function connectionDB () {
