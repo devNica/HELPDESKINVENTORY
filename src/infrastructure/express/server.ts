@@ -13,6 +13,8 @@ import constants from '@common/constants/constants'
 import sequelizeInstance from '@infrastructure/sequelize/connection'
 import sequelizeLoader from '@infrastructure/sequelize/orm/orm'
 
+import { eventLogger } from '@common/logger/event-logger'
+
 export const app = express()
 
 setupApp(app)
@@ -24,5 +26,5 @@ sequelizeLoader(sequelizeInstance, false)
   .catch(err => console.log('connection database failed: ', err))
 
 app.listen(constants.SERVER_PORT, () => {
-  console.log(`server is running on port: ${constants.SERVER_PORT}`)
+  eventLogger.getLoggerInfo(`🚀 Server is running on port: ${constants.SERVER_PORT}`)
 })
