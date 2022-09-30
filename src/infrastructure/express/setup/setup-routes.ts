@@ -1,5 +1,5 @@
 import { Application } from 'express'
-import { ApiResponse } from '../adapters/api-response-adapter'
+import { ApiResponse } from '../adapters/api-response.adapter'
 import { ApiType } from '../api'
 
 export const setupRoutes = (app: Application, routes: ApiType[]): void => {

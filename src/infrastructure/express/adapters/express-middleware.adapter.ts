@@ -1,7 +1,7 @@
 import { HttpResponse } from '@core/application/ports/http/http-response'
 import { Middleware } from '@core/application/ports/middlewares/middleware'
 import { NextFunction, Request, Response } from 'express'
-import { ApiResponse } from './api-response-adapter'
+import { ApiResponse } from './api-response.adapter'
 
 export const expressMiddlewareAdapter = (middleware: Middleware) => {
   return async (request: Request, _response: Response, next: NextFunction) => {
